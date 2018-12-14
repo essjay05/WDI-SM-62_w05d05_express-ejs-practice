@@ -22,8 +22,20 @@ app.use(logger('dev'));
 
 // ROUTES
 app.get('/', (req, res) => {
-    let hello = "Hello World!"
-    res.json({ hello }); 
+    let name = "Joy";
+    let array = ["Caleb", "Daniel", "Sean", "Pradeep", "Alex", "Zac"];
+    res.render('index', { name, array });
+});
+
+app.get('/chuck', (req, res) => {
+    axios.get('http://api.icndb.com/jokes/random')
+        .then(({ data }) => {
+            res.render('chuck', { data });
+        })
+});
+
+app.get('/giphy', (req, res) => {
+    res.render('giphy');
 })
 
 
