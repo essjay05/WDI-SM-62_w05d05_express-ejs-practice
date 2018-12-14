@@ -5,6 +5,8 @@ const
     axios = require('axios'),
     logger = require('morgan'),
     expressLayouts = require('express-ejs-layouts'),
+    mongoose= require('mongoose'),
+    methodOverride= require('method-override'),
     PORT = process.env.PORT || 3000;
 
 // DATABASE CONNECTION
@@ -35,7 +37,10 @@ app.get('/chuck', (req, res) => {
 });
 
 app.get('/giphy', (req, res) => {
-    res.render('giphy');
+    axios.get('http://api.giphy.com/v1/gifs/random&api_key=DDylHjODKL4waP5jxgAIDYThfkAnKzjD')
+        .then(({data}) => {
+            res.render('giphy', {data});
+        })
 })
 
 
